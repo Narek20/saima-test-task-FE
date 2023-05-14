@@ -1,0 +1,27 @@
+.input {
+  width: 100%;
+  min-height: 30px;
+  padding: 10px 15px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: black;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+  .input {
+    width: 100%;
+    min-height: 30px;
+    padding: 10px 15px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    font-size: 20px;
+  }
+}
