@@ -11,11 +11,23 @@ const YoutubeVideoDownload = () => {
   const [videoUrl, setVideoUrl] = useState('')
   const [downloadLink, setDownloadLink] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleSubmit = async () => {
     if (videoUrl) {
+      if(!videoUrl.includes("https://www.youtube.com/watch")) {
+        setErrorMessage("It is not a valid Youtube URL")
+        return
+      }
+
+      setErrorMessage('')
       setIsLoading(true)
       const data = await uploadYouTubeVideo(videoUrl)
+
+      if (!data.success) {
+        setErrorMessage(data.message)
+        return
+      }
 
       if (data.data) {
         setIsLoading(false)
@@ -33,11 +45,12 @@ const YoutubeVideoDownload = () => {
         placeholder="Put video link"
       />
       {downloadLink && !isLoading && (
-        <a href={downloadLink} target="blank" download={true}>
+        <a href={downloadLink} target="blank" download>
           {downloadLink}
         </a>
       )}
-      {isLoading && <Loader />}
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+      {isLoading && !errorMessage && <Loader />}
       <Button onClick={handleSubmit} title="Submit" />
     </div>
   )
